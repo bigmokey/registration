@@ -1,7 +1,6 @@
 package com.dyl.yygh.hosp.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.dyl.hosp.common.utils.MD5;
 import com.dyl.yygh.common.exception.YyghException;
@@ -12,11 +11,12 @@ import com.dyl.yygh.vo.hosp.HospitalSetQueryVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Random;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/admin/hosp/hospitalSet")
 @Api(tags = "医院设置管理")
@@ -53,8 +53,11 @@ public class HospitalSetController {
         Page<HospitalSet> page = new Page<>(current,limit);
         //构建条件
         QueryWrapper<HospitalSet> wrapper = new QueryWrapper<>();
-        String hosname = hospitalSetQueryVo.getHosname();//医院名称
-        String hoscode = hospitalSetQueryVo.getHoscode();//医院编号
+        String hosname = null;String hoscode = null;
+        if (!StringUtils.isEmpty(hospitalSetQueryVo)){
+            hosname= hospitalSetQueryVo.getHosname();//医院名称
+            hoscode= hospitalSetQueryVo.getHoscode();//医院编号
+        }
         if(!StringUtils.isEmpty(hosname)) {
             wrapper.like("hosname",hospitalSetQueryVo.getHosname());
         }
@@ -87,11 +90,7 @@ public class HospitalSetController {
     //5 根据id获取医院设置
     @GetMapping("getHospSet/{id}")
     public Result getHospSet(@PathVariable Long id) {
-        try{
-            int a=10/0;
-        }catch (Exception e){
-            throw new YyghException("dd",100);
-        }
+
         HospitalSet hospitalSet = hospitalSetService.getById(id);
         return Result.ok(hospitalSet);
     }
