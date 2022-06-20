@@ -3,10 +3,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.dyl</groupId>
-    <artifactId>hosppital-manage</artifactId>
+    <artifactId>hospital-manage</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>hosppital-manage</name>
-    <description>hosppital-manage</description>
+    <name>hospital-manage</name>
+    <description>hospital-manage</description>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
